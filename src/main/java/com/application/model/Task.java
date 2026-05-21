@@ -1,9 +1,10 @@
 package com.application.model;
 
+
 import java.time.LocalDateTime;
 
 public class Task {
-    private int id;
+    private Integer id;
     private String title;
     private boolean completed;
     private LocalDateTime createdAt;
@@ -17,11 +18,11 @@ public class Task {
         this.createdAt = createdAt;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -49,4 +50,8 @@ public class Task {
         this.createdAt = createdAt;
     }
 
+    @Override
+    public String toString() {
+       return "%s, isCompleted: %b, createdAt: %s".formatted(title, completed, createdAt);
+    }
 }

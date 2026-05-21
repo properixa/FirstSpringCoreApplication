@@ -1,5 +1,6 @@
 package com.application.repository;
 
+import com.application.id.IdGenerator;
 import com.application.model.Task;
 import org.springframework.stereotype.Repository;
 
@@ -10,15 +11,23 @@ import java.util.concurrent.ConcurrentHashMap;
 @Repository
 public class InMemoryTaskRepository implements TaskRepository{
 
+    private final IdGenerator idGenerator;
     private final ConcurrentHashMap<Integer, Task> tasks = new ConcurrentHashMap<>();
 
+    public InMemoryTaskRepository(IdGenerator idGenerator) {
+        this.idGenerator = idGenerator;
+    }
+
     @Override
-    public boolean save(Task task) {
-        if (tasks.containsKey(task.getId())) {
-            return false;
+    public Task save(Task task) {
+        if (task.getId() == null) {
+            int newId = idGenerator.getNewId();
+            task.setId(newId);
+            tasks.put(newId, task);
+        } else {
+            tasks.put(task.getId(), task);
         }
-        tasks.put(task.getId(), task);
-        return true;
+        return task;
     }
 
     @Override
