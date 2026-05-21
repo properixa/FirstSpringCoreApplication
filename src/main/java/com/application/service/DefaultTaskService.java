@@ -23,7 +23,7 @@ public class DefaultTaskService implements TaskService {
 
     @Override
     public Task createTask(String title) {
-        if (findAllTask().size() + 1 > UNCOMPLETED_TASK_LIMIT) {
+        if (repository.findUncompletedTasks().size() + 1 > UNCOMPLETED_TASK_LIMIT) {
             throw new UncompletedTodoLimitReachedException("Достигнут лимит незавершенных задач");
         }
         Task task = new Task();
@@ -78,6 +78,9 @@ public class DefaultTaskService implements TaskService {
 
     @Override
     public boolean deleteTask(Integer id) {
-        return repository.delete(id);
+        if (!repository.delete(id)) {
+            throw new TaskNotFoundException("Задача под указанным ID не найдена");
+        }
+        return true;
     }
 }

@@ -10,4 +10,5 @@ public interface TaskRepository {
     Optional<Task> findById(int id);
     List<Task> findAll();
     boolean delete(int taskId);
+    List<Task> findUncompletedTasks();
 }

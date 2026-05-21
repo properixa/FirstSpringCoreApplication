@@ -32,9 +32,12 @@ public class ConsoleWorker implements ConsoleInterface {
                    addTask();
                    break;
                case "3":
-                   changeTask();
+                   completeTask();
                    break;
                case "4":
+                   changeTask();
+                   break;
+               case "5":
                    deleteTask();
                    break;
                case "exit":
@@ -77,11 +80,13 @@ public class ConsoleWorker implements ConsoleInterface {
         System.out.print("Введите ID заметки, которую вы хотите удалить: ");
         Integer toDeleteId = scanner.nextInt();
         scanner.nextLine();
-        if (taskService.deleteTask(toDeleteId)) {
-            System.out.println("Заметка удалена.");
-        } else {
-            System.out.println("Заметка не была удалена (скорее всего такой заметки не существует)");
+        try {
+            taskService.deleteTask(toDeleteId);
+            System.out.println("Заметка " + toDeleteId + " была удалена.");
+        } catch (TaskNotFoundException ex) {
+            System.out.println(ex.getMessage());
         }
+
         System.out.println();
     }
 
@@ -102,9 +107,22 @@ public class ConsoleWorker implements ConsoleInterface {
         System.out.println("Приветствую в списочнике задач. Что мы хотим сделать?");
         System.out.println("1. Посмотреть существующие задачи");
         System.out.println("2. Добавить новую задачу");
-        System.out.println("3. Изменить задачу");
-        System.out.println("4. Удалить задачу");
+        System.out.println("3. Завершить задачу");
+        System.out.println("4. Изменить задачу");
+        System.out.println("5. Удалить задачу");
         System.out.println("Наберите exit для выхода\n");
         System.out.print("Введите действие: ");
+    }
+
+    private void completeTask() {
+        System.out.print("Введите ID задачи, которую хотите завершить: ");
+        Integer idToComplete = scanner.nextInt();
+        scanner.nextLine();
+
+        try {
+            taskService.update(idToComplete, true);
+        } catch (TaskNotFoundException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 }

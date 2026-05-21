@@ -44,4 +44,9 @@ public class InMemoryTaskRepository implements TaskRepository{
     public boolean delete(int taskId) {
         return tasks.remove(taskId) != null;
     }
+
+    @Override
+    public List<Task> findUncompletedTasks() {
+        return tasks.values().stream().filter(Task::isCompleted).toList();
+    }
 }
