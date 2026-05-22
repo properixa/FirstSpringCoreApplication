@@ -14,6 +14,8 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     implementation("org.springframework:spring-context:7.0.7")
+    implementation("org.springframework:spring-aop:7.0.7")
+    implementation("org.aspectj:aspectjweaver:1.9.25.1")
 }
 
 tasks.test {
