@@ -14,12 +14,12 @@
 - **AppConfig** - аннотация @Configuration, @ComponentScan, @PropertySource, @EnableAspectJAutoProxy
 - Созданы кастомные исключения TaskNotFoundException и UncompletedTodoLimitReachedException
 - **AOP логирование** - класс LoggingAspect для логирования перед методом, после возвращения метода и после выброса исключения
+- Пример циклической зависимости (AuditService и NotificationService), а также способ его решения через аннотацию @Lazy
 
 ## TODO:
 
 По сути, то что гарантировано будет добавлено по мере возможности:
 
-- Пример циклической зависимости и способ ее решения
 - BeanPostProcessor
 - Prototype Bean
 - Прокси и внутренние вызовы (пример)
