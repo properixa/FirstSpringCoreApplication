@@ -43,6 +43,9 @@ public class ConsoleWorker implements ConsoleInterface {
                case "6":
                    printReport();
                    break;
+               case "7":
+                   checkCall();
+                   break;
                case "exit":
                    running = false;
                    break;
@@ -114,6 +117,7 @@ public class ConsoleWorker implements ConsoleInterface {
         System.out.println("4. Изменить задачу");
         System.out.println("5. Удалить задачу");
         System.out.println("6. Получить отчет по задачам");
+        System.out.println("7. Проверить работу аспекта через this и self");
         System.out.println("Наберите exit для выхода\n");
         System.out.print("Введите действие: ");
     }
@@ -132,6 +136,11 @@ public class ConsoleWorker implements ConsoleInterface {
 
     private void printReport() {
         taskService.printReport();
+        System.out.println();
+    }
+
+    private void checkCall() {
+        taskService.internalCallDemo();
         System.out.println();
     }
 }

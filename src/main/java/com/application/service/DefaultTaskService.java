@@ -1,5 +1,6 @@
 package com.application.service;
 
+import com.application.annotation.LogExecution;
 import com.application.exceptions.TaskNotFoundException;
 import com.application.exceptions.UncompletedTodoLimitReachedException;
 import com.application.model.Task;
@@ -7,6 +8,7 @@ import com.application.report.TodoReport;
 import com.application.repository.TaskRepository;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -15,15 +17,18 @@ import java.util.Optional;
 import java.util.function.Predicate;
 
 @Service
+@LogExecution
 public class DefaultTaskService implements TaskService {
     private final TaskRepository repository;
     private final ObjectProvider<TodoReport> provider;
+    private final TaskService self;
     @Value("${task.uncompleted.limit}")
     private int UNCOMPLETED_TASK_LIMIT;
 
-    public DefaultTaskService(TaskRepository repository, ObjectProvider<TodoReport> provider) {
+    public DefaultTaskService(TaskRepository repository, ObjectProvider<TodoReport> provider, @Lazy TaskService self) {
         this.repository = repository;
         this.provider = provider;
+        this.self = self;
     }
 
     @Override
@@ -97,5 +102,17 @@ public class DefaultTaskService implements TaskService {
         report.setCompleted(tasks.stream().filter(Task::isCompleted).count());
         report.setUncompleted(tasks.stream().filter(task -> !task.isCompleted()).count());
         report.printReport();
+    }
+
+    public void internalCallDemo() {
+        System.out.println("Демонстрация вызовов");
+
+        // Прямой вызов - аспект не сработает
+        System.out.println("Через this: ");
+        this.createTask("tempTask");
+
+        // Вызов через самовнедренный прокси - аспект сработает
+        System.out.println("Через self: ");
+        self.createTask("tempTask1");
     }
 }

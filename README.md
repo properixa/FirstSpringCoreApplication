@@ -17,11 +17,11 @@
 - Пример циклической зависимости (AuditService и NotificationService), а также способ его решения через аннотацию @Lazy
 - Prototype бин (TodoReport), который создается через ObjectProvider
 - CustomBeanPostProcessor который рабоатет с компонентами с аннотацией @LogExecution
+- checkCall для проверки работы AOP с this и self (самоинжект в конструктор с @Lazy)
 
 ## TODO:
 
 По сути, то что гарантировано будет добавлено по мере возможности:
 
-- Прокси и внутренние вызовы (пример)
 - Еще одна реализация репозитория (через БД PostgreSQL)
 - SpEL
