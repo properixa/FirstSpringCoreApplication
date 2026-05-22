@@ -2,6 +2,7 @@ package com.application.repository;
 
 import com.application.id.IdGenerator;
 import com.application.model.Task;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
+@Qualifier("InMemoryRepo")
 public class InMemoryTaskRepository implements TaskRepository{
 
     private final IdGenerator idGenerator;
@@ -47,6 +49,6 @@ public class InMemoryTaskRepository implements TaskRepository{
 
     @Override
     public List<Task> findUncompletedTasks() {
-        return tasks.values().stream().filter(Task::isCompleted).toList();
+        return tasks.values().stream().filter(task -> !task.isCompleted()).toList();
     }
 }

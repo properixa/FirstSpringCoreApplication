@@ -18,10 +18,10 @@
 - Prototype бин (TodoReport), который создается через ObjectProvider
 - CustomBeanPostProcessor который рабоатет с компонентами с аннотацией @LogExecution
 - checkCall для проверки работы AOP с this и self (самоинжект в конструктор с @Lazy)
+- Реализация InFileTaskRepository, выбор основного репозитория либо через @Primary (стоит на InFile), либо через @Qualifier
 
 ## TODO:
 
 По сути, то что гарантировано будет добавлено по мере возможности:
 
-- Еще одна реализация репозитория (через БД PostgreSQL)
 - SpEL
