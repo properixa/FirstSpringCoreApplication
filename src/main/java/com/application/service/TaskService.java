@@ -14,4 +14,5 @@ public interface TaskService {
     Task update(Integer id, String title);
     Task update(Integer id, boolean completed);
     boolean deleteTask(Integer id);
+    void printReport();
 }

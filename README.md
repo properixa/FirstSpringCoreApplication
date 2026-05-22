@@ -15,13 +15,13 @@
 - Созданы кастомные исключения TaskNotFoundException и UncompletedTodoLimitReachedException
 - **AOP логирование** - класс LoggingAspect для логирования перед методом, после возвращения метода и после выброса исключения
 - Пример циклической зависимости (AuditService и NotificationService), а также способ его решения через аннотацию @Lazy
+- Prototype бин (TodoReport), который создается через ObjectProvider
+- CustomBeanPostProcessor который рабоатет с компонентами с аннотацией @LogExecution
 
 ## TODO:
 
 По сути, то что гарантировано будет добавлено по мере возможности:
 
-- BeanPostProcessor
-- Prototype Bean
 - Прокси и внутренние вызовы (пример)
 - Еще одна реализация репозитория (через БД PostgreSQL)
 - SpEL
