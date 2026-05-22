@@ -13,12 +13,12 @@
 - **Консольный интерфейс** - класс ConsoleWorker с циклом меню, обработка исключений в нем
 - **AppConfig** - аннотация @Configuration, @ComponentScan, @PropertySource, @EnableAspectJAutoProxy
 - Созданы кастомные исключения TaskNotFoundException и UncompletedTodoLimitReachedException
+- **AOP логирование** - класс LoggingAspect для логирования перед методом, после возвращения метода и после выброса исключения
 
 ## TODO:
 
 По сути, то что гарантировано будет добавлено по мере возможности:
 
-- AOP-aspect - логирование
 - Пример циклической зависимости и способ ее решения
 - BeanPostProcessor
 - Prototype Bean
